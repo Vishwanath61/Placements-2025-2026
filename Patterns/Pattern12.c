@@ -1,59 +1,50 @@
 /******************************************************************************
 
-Input: I came by car 
-Target: emac
-Output: 3 
-
-Input: I play tennis
-Target: tennis
-Output: -1
+1 2 3
+6 5 4 
+7 8 9
 
 *******************************************************************************/
 
 #include <stdio.h>
-#include <string.h>
 
-int isMatch(char *input, char *target, int ind) {
-    int tarlen = strlen(target), i = 0;
-    while(i < tarlen) {
-        if(input[ind + i] != target[tarlen - 1 - i]) {
-            return 0;
-        }
-        i++;
-    }
-    if(input[ind + i] == ' ' || input[ind + i] == '\0')  return 1;
-    return 0;
-}
-
-int findMatch(char *input, char *target) {
-    int inplen = strlen(input), i = 0;
-    while(i < inplen) {
-        if(input[i] == ' ') {
-            i++;
-        }
-        if(isMatch(input, target, i)) {
-            return i + 1;
-        }
-        i++;
-    }
-    return -1;
-}
 
 int main()
 {
-    char input[100], target[100];
+    int n = 4, num = 1;
     
-    printf("Enter Input String: ");
-    fgets(input, sizeof(input), stdin);
-    input[strcspn(input, "\n")] = '\0';
-    int inplength = strlen(input);
-        
-    printf("Enter Target String: ");
-    fgets(target, sizeof(input), stdin);
-    target[strcspn(target, "\n")] = '\0';
-    int tarlength = strlen(target);
-    
-    printf("\nOutput - %d", findMatch(input, target));
-    
-    return 0;
+    for(int i = 0; i < n; i++) {
+        if(i % 2) {
+            int prev = num + n -1;
+            for(int j = 0; j < n; j++) {
+                printf("%d ", prev--);
+                num++;
+            }
+        } else {
+            for(int j = 0; j < n; j++) {
+                printf("%d ", num++);
+            }
+        }
+        printf("\n");
+    }
 }
+
+
+/* Approach 2
+int main()
+{
+    int n = 4, num = 1, sum = 1;
+    
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < n; j++) {
+            printf("%d ", num);
+            num += sum;
+        }
+        num -= sum;
+        sum = (sum == 1) ? -1 : 1;
+        num += n;
+        printf("\n");
+    }
+
+    return 0;
+}*/
